@@ -16,13 +16,41 @@ public:
 	ABasePawn();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void RotateTurret(FVector LookAtTarget);
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+private:
+	UPROPERTY(
+		meta=(AllowPrivateAccess = "true"),
+		VisibleAnywhere,
+		BlueprintReadOnly,
+		Category= "Components"
+	)
+	class UCapsuleComponent* CapsuleComp;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(
+		meta = (AllowPrivateAccess = "true"),
+		VisibleAnywhere,
+		BlueprintReadWrite,
+		Category = "Components"
+	)
+	UStaticMeshComponent* BaseMesh;
+
+	UPROPERTY(
+		meta = (AllowPrivateAccess = "true"),
+		VisibleAnywhere,
+		BlueprintReadWrite,
+		Category = "Components"
+	)
+	UStaticMeshComponent* TurretMesh;
+
+	UPROPERTY(
+		meta = (AllowPrivateAccess = "true"),
+		VisibleAnywhere,
+		BlueprintReadWrite,
+		Category = "Components"
+	)
+	USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere, Category="Turret")
+	float TurretRotationSpeed = 15.f;
 };
