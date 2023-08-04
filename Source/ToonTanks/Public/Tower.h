@@ -19,10 +19,19 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	bool CheckIsInRange() const;
 
 private:
 	class ATank* Tank;
 
 	UPROPERTY(EditDefaultsOnly, Category= "Combat")
 	float FireRange = 500.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category= "Combat")
+	FTimerHandle FireRateTimerHandle;
+
+	UPROPERTY(EditDefaultsOnly, Category= "Combat")
+	float FireRate = 2.f;
+
+	void CheckFireCondition();
 };
