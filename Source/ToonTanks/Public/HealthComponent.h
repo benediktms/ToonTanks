@@ -39,4 +39,6 @@ public:
 		class AController* InstigatedBy,
 		AActor* DamageCauser
 	);
+
+	class AToonTanksGameMode* ToonTanksGameMode;
 };
