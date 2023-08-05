@@ -42,9 +42,12 @@ void ABasePawn::Fire()
 {
 	const FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	const FRotator Rotation = TurretMesh->GetComponentRotation();
-	GetWorld()->SpawnActor<AProjectile>(
+	
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileClass,
 		Location,
 		Rotation
 	);
+	// this is needed to ensure that in AProjectile::OnHit the GetOwner method returns the correct value
+	Projectile->SetOwner(this);
 }

@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category="Combat")
+	UPROPERTY(EditDefaultsOnly, Category="Mesh")
 	UStaticMeshComponent* Mesh;
 
 	UPROPERTY(VisibleAnywhere, Category="Movement")
@@ -36,6 +36,10 @@ private:
 	UPROPERTY(EditAnywhere, Category="Movement")
 	float ProjectileMaxSpeed = 1300.f;
 
+	UPROPERTY(EditAnywhere, Category="Combat")
+	float Damage = 50.f;
+
+	// Multi cast delegate
 	UFUNCTION()
 	void OnHit(
 		UPrimitiveComponent* HitComponent,
