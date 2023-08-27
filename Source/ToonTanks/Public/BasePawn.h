@@ -58,4 +58,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Projectile")
 	TSubclassOf<class AProjectile> ProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Combat")
+	class UParticleSystem* DeathParticles;
 };
