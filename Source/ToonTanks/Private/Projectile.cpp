@@ -40,15 +40,25 @@ void AProjectile::OnHit(
 	const FHitResult& Hit
 )
 {
-	auto ProjectileOwner = GetOwner();
-	if (ProjectileOwner == nullptr) return;
+	const auto ProjectileOwner = GetOwner();
+	if (ProjectileOwner == nullptr)
+	{
+		Destroy();
+		return;
+	};
 
-	auto ProjectileOwnerInstigator = ProjectileOwner->GetInstigatorController();
-	auto DamageTypeClass = UDamageType::StaticClass();
+	const auto ProjectileOwnerInstigator = ProjectileOwner->GetInstigatorController();
+	const auto DamageTypeClass = UDamageType::StaticClass();
 
 	if (OtherActor && OtherActor != this && OtherActor != ProjectileOwner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, ProjectileOwnerInstigator, this, DamageTypeClass);
-		Destroy();
+
+		if (HitParticles)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
+		}
 	}
+
+	Destroy();
 }
