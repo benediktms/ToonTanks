@@ -49,15 +49,15 @@ void AProjectile::OnHit(
 	const FHitResult& Hit
 )
 {
-	const auto ProjectileOwner = GetOwner();
+	const AActor* ProjectileOwner = GetOwner();
 	if (ProjectileOwner == nullptr)
 	{
 		Destroy();
 		return;
 	};
 
-	const auto ProjectileOwnerInstigator = ProjectileOwner->GetInstigatorController();
-	const auto DamageTypeClass = UDamageType::StaticClass();
+	AController* ProjectileOwnerInstigator = ProjectileOwner->GetInstigatorController();
+	UClass* DamageTypeClass = UDamageType::StaticClass();
 
 	if (OtherActor && OtherActor != this && OtherActor != ProjectileOwner)
 	{
