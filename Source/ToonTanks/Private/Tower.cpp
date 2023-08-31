@@ -45,7 +45,11 @@ void ATower::Tick(const float DeltaSeconds)
 
 void ATower::CheckFireCondition()
 {
-	if (Tank && CheckIsInRange())
+	if (Tank == nullptr)
+	{
+		return;
+	}
+	if (Tank->bAlive && CheckIsInRange())
 	{
 		Fire();
 	}
